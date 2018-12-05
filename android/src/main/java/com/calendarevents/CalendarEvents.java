@@ -178,7 +178,7 @@ public class CalendarEvents extends ReactContextBaseJavaModule {
 
     //region Event Accessors
     private WritableNativeArray findEvents(Dynamic startDate, Dynamic endDate, ReadableArray calendars) {
-        String dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
+        String dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ";
         SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
         sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
 
@@ -327,14 +327,14 @@ public class CalendarEvents extends ReactContextBaseJavaModule {
     }
 
     private int addEvent(String title, ReadableMap details, ReadableMap options) throws ParseException {
-        String dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
+        String dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ";
         SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
 
-        if (details.hasKey("timeZone")) {
-            sdf.setTimeZone(TimeZone.getTimeZone(details.getString("timeZone")));
-        } else {
-            sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
-        }
+        // if (details.hasKey("timeZone")) {
+        //     sdf.setTimeZone(TimeZone.getTimeZone(details.getString("timeZone")));
+        // } else {
+        //     sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+        // }
 
         ContentResolver cr = reactContext.getContentResolver();
         ContentValues eventValues = new ContentValues();
@@ -587,7 +587,7 @@ public class CalendarEvents extends ReactContextBaseJavaModule {
 
             } else {
                 ContentValues eventValues = new ContentValues();
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
                 sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
 
                 Calendar exceptionStart = Calendar.getInstance();
@@ -723,7 +723,7 @@ public class CalendarEvents extends ReactContextBaseJavaModule {
             WritableNativeMap alarm = new WritableNativeMap();
 
             Calendar cal = Calendar.getInstance();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
             sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
             cal.setTimeInMillis(startDate);
             int minutes;
@@ -840,7 +840,7 @@ public class CalendarEvents extends ReactContextBaseJavaModule {
     private WritableNativeMap serializeEvent(Cursor cursor) {
         WritableNativeMap event = new WritableNativeMap();
 
-        String dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
+        String dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ";
         SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
         sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
 
