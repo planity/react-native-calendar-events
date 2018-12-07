@@ -23,6 +23,7 @@ static NSString *const _occurrenceDate = @"occurrenceDate";
 static NSString *const _isDetached = @"isDetached";
 static NSString *const _availability = @"availability";
 static NSString *const _attendees    = @"attendees";
+static NSString *const _timeZone    = @"timeZone";
 
 @implementation RNCalendarEvents
 
@@ -89,6 +90,7 @@ RCT_EXPORT_MODULE()
     NSDictionary *recurrenceRule = [RCTConvert NSDictionary:details[_recurrenceRule]];
     NSString *availability = [RCTConvert NSString:details[_availability]];
     NSArray *attendees = [RCTConvert NSArray:details[_attendees]];
+    NSString *timeZone = [RCTConvert NSString:details[_timeZone]];
 
     if (eventId) {
         calendarEvent = (EKEvent *)[self.eventStore calendarItemWithIdentifier:eventId];
@@ -96,7 +98,7 @@ RCT_EXPORT_MODULE()
     } else {
         calendarEvent = [EKEvent eventWithEventStore:self.eventStore];
         calendarEvent.calendar = [self.eventStore defaultCalendarForNewEvents];
-        calendarEvent.timeZone = [NSTimeZone defaultTimeZone];
+        calendarEvent.timeZone = [NSTimeZone timeZoneWithName:timeZone];
 
         if (calendarId) {
             EKCalendar *calendar = [self.eventStore calendarWithIdentifier:calendarId];
