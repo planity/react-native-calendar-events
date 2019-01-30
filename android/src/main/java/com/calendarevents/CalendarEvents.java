@@ -327,7 +327,7 @@ public class CalendarEvents extends ReactContextBaseJavaModule {
     }
 
     private int addEvent(String title, ReadableMap details, ReadableMap options) throws ParseException {
-        String dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSX";
+        String dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ";
         SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
 
         if (details.hasKey("timeZone")) {
